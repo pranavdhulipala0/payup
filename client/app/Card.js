@@ -18,8 +18,12 @@ const Card = ({roomId,roomName,roomUsers}) => {
     convertToString();
   },[])
 
+  function openGroup(){
+    
+  }
+
   return (
-    <TouchableOpacity style={styles.containerBox}>
+    <TouchableOpacity style={styles.containerBox} onClick = {openGroup}>
               <Text style={styles.headingText}>{roomName}</Text>
               <Text style={styles.paragraphText}>
                 {userList}

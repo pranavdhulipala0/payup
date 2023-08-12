@@ -56,7 +56,7 @@ const Index = () => {
 
   return (
     <SafeAreaView>
-      <Stack.Screen
+      {isLoggedIn? (<View><Stack.Screen
         options={{
           headerShadowVisible: true,
           headerTitle: "",
@@ -67,12 +67,25 @@ const Index = () => {
           headerLeft: () => <Payup img={wallet} />,
           headerRight: () => <Payup img={create} />,
         }}
-      />
+      /></View>) : (<View><Stack.Screen
+        options={{
+          headerShadowVisible: true,
+          headerTitle: "",
+          headerTintColor:'black',
+          headerStyle: {
+            backgroundColor: 'white'
+          },
+          headerLeft: () => <Payup img={wallet} />,
+        }}
+      /></View>)
+      }
+
       {isLoaded ? (
         isLoggedIn ? (
           <Home myRooms={myRooms} username = {username} loadingState={isLoaded} />
         ) : (
           <View>
+
             <Text style={styles.headingText}>Pleaase login first</Text>
           </View>
         )
