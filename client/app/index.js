@@ -26,7 +26,7 @@ const Index = () => {
 
   async function fetcher(name) {
     try {
-      const response = await fetch("http://192.168.0.199:3002/fetchRooms", {
+      const response = await fetch("https://payup-043m.onrender.com/fetchRooms", {
         method: "POST",
         headers: {
           "Content-Type": "application/json", // Set the content type to JSON
