@@ -13,6 +13,16 @@ const styles = {
         fontStyle: "Times New Roman",
         fontWeight: 'bold',
     },
+    containerCenter: {
+        marginTop: 10,
+        marginLeft: 15,
+        marginRight:15,
+        paddingVertical: 8,
+        textAlign: 'center',
+        fontSize: 70,
+        fontStyle: "Times New Roman",
+        fontWeight: 'bold',
+    },
     textContainer:{
         color:'#57595B',
         fontSize:15,
