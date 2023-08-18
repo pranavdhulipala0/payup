@@ -18,6 +18,13 @@ const styles = {
         fontSize:15,
         fontWeight:'bold'
     },
+    textWithMargin:{
+        color:'#57595B',
+        fontSize:15,
+        fontWeight:'bold',
+        alignItems:'center',
+        margin:10
+    },
     roomText:{
         fontSize:20,
         fontWeight:'bold',

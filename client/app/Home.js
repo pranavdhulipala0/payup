@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, ScrollView } from "react-native";
 import styles from "../styles/styles";
 import Card from "./Card";
-const Home = ({ myRooms, username, isLoaded }) => {
+const Home = ({ myRooms, username, isLoaded, }) => {
   return (
     <View>
       <ScrollView style={styles.whiteBackground}>

@@ -2,7 +2,9 @@ import React from 'react'
 import {useState, useEffect} from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
 import styles from '../styles/styles';
+import { useNavigation } from 'expo-router';
 const Card = ({roomId,roomName,roomUsers}) => {
+  const navigation = useNavigation();
   const [userList,setUserList] = useState("");
   const convertToString = () =>{
     var myUsers = "";
@@ -19,11 +21,13 @@ const Card = ({roomId,roomName,roomUsers}) => {
   },[])
 
   function openGroup(){
-    
+    navigation.navigate("Group",{
+      data:{roomId:roomId}
+    })
   }
 
   return (
-    <TouchableOpacity style={styles.containerBox} onClick = {openGroup}>
+    <TouchableOpacity style={styles.containerBox} onPress = {openGroup}>
               <Text style={styles.headingText}>{roomName}</Text>
               <Text style={styles.paragraphText}>
                 {userList}
