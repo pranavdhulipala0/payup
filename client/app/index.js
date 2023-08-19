@@ -28,9 +28,17 @@ const Index = () => {
   const [myRooms, setMyRooms] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [username, setUsername] = useState("");
+  const [refreshing, setRefreshing] = useState(false);
   const navigation = useNavigation();
   function createGroup() {
     navigation.navigate("Create");
+  }
+
+  function handleRefresh(){
+    setRefreshing(true)
+    fetcher("drakeswd");
+    // setMyRooms(updatedData);
+    setRefreshing(false);
   }
 
   async function fetcher(name) {
@@ -66,6 +74,8 @@ const Index = () => {
     });
   }, []);
 
+  useEffect(() => {}, []);
+
   return (
     <SafeAreaView>
       {isLoggedIn ? (
@@ -79,7 +89,9 @@ const Index = () => {
                 backgroundColor: "white",
               },
               headerLeft: () => <Payup img={wallet} />,
-              headerRight: () => <CreateGroup img={create} />,
+              headerRight: () => (
+                <CreateGroup img={create} username={username} />
+              ),
             }}
           />
         </View>
@@ -101,7 +113,13 @@ const Index = () => {
 
       {isLoaded ? (
         isLoggedIn ? (
-          <Home myRooms={myRooms} username={username} loadingState={isLoaded} />
+          <Home
+            myRooms={myRooms}
+            username={username}
+            loadingState={isLoaded}
+            onRefresh={handleRefresh} // Assuming you have a function to handle the refresh
+            refreshing={refreshing} // A boolean state to track whether refreshing is in progress
+          />
         ) : (
           <View>
             <Text style={styles.headingText}>Pleaase login first</Text>

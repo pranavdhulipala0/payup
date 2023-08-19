@@ -1,11 +1,14 @@
 import React from "react";
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView , RefreshControl} from "react-native";
 import styles from "../styles/styles";
 import Card from "./Card";
-const Home = ({ myRooms, username, isLoaded, }) => {
+const Home = ({ myRooms, username, isLoaded, onRefresh, refreshing }) => {
   return (
     <View>
-      <ScrollView style={styles.whiteBackground}>
+      <ScrollView
+      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+      style = {styles.whiteBackground}
+    >
         <View style = {styles.container}>
           <Text style={styles.textContainer}>Welcome, {username}!</Text>
         </View>
