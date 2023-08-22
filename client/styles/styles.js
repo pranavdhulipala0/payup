@@ -110,7 +110,37 @@ const styles = {
         paddingBottom: 15,
         shadowOffset: { width: 0, height: 4 },
         elevation: 2,
-
+    },
+    wideGreenButton:{
+        backgroundColor:'green',
+        color: 'white',
+        fontWeight:'bold',
+        alignItems:'center',
+        borderRadius: 5,
+        padding: 10,
+        width:301,
+        shadowColor: '#57595B',
+        margin: 10,
+        marginTop: 4,
+        marginBottom: 4,
+        paddingTop: 15,
+        paddingBottom: 15,
+        shadowOffset: { width: 0, height: 4 },
+        elevation: 2,
+    },
+    wideContainerBox:{
+        backgroundColor: 'lightblue',
+        borderRadius: 5,
+        padding: 10,
+        width:300,
+        shadowColor: '#57595B',
+        margin: 12,
+        marginTop: 20,
+        marginBottom: 4,
+        paddingTop: 15,
+        paddingBottom: 15,
+        shadowOffset: { width: 0, height: 4 },
+        elevation: 2,
     },
     smallContainerBox: {
         backgroundColor: 'white',
@@ -143,6 +173,11 @@ const styles = {
     theBetterSearchBar:{
     margin:10,
     },
+    colorSearchBar:{
+        margin:10,
+        borderColor:'white',
+        borderBottomWidth:2
+    },
     searchScroll:{
        marginHorizontal:15,
        marginVertical:0,
@@ -157,6 +192,54 @@ const styles = {
         paddingHorizontal: 10,
         paddingVertical: 10,  
     },
+    dropdown:{
+        color: "#bb233d"
+    },
+    modalContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      },
+      modalContent: {
+        backgroundColor: 'white',
+        padding: 20,
+        borderRadius: 10,
+        alignItems: 'center',
+      },
+      modalCenter:{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    greenContainerBox:{
+        backgroundColor: 'green',
+        color:'white',
+        borderRadius: 5,
+        padding: 30,
+        margin: 2,
+        marginTop: 7,
+        marginBottom: 2,
+        paddingTop: 10,
+        paddingBottom: 10,
+        shadowColor: '#57595B',
+        shadowOffset: { width: 0, height: 4 },
+        elevation: 2,
+    },
+    blueContainerBox:{
+        backgroundColor: '#0cc2f5',
+        color:'white',
+        borderRadius: 5,
+        padding: 40,
+        margin: 2,
+        marginTop: 7,
+        marginBottom: 2,
+        paddingTop: 10,
+        paddingBottom: 10,
+        shadowColor: '#57595B',
+        shadowOffset: { width: 0, height: 4 },
+        elevation: 2,
+    }
 
 }
 

@@ -32,6 +32,25 @@ const Create = ({ route }) => {
     });
   }, []);
 
+  function generateUniqueId() {
+  // Get the current timestamp
+  const timestamp = new Date().getTime().toString();
+
+  // Generate a random number between 10000 and 99999
+  const randomNum = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000;
+
+  // Combine timestamp and random number
+  const uniqueId = timestamp + randomNum.toString();
+
+  // Ensure the ID is exactly 10 digits by truncating or padding
+  return uniqueId.slice(0, 10).padEnd(10, '0');
+}
+
+// Generate a unique ID
+const uniqueId = generateUniqueId();
+console.log(uniqueId);
+
+
   async function createGroupFunction() {
     try {
       const response = await fetch("https://payup-043m.onrender.com/create", {
@@ -40,7 +59,7 @@ const Create = ({ route }) => {
           "Content-Type": "application/json", // Set the content type to JSON
         },
         body: JSON.stringify({
-          roomId: 1,
+          roomId: generateUniqueId(),
           roomName: groupName,
           users: groupmem,
           usercount: groupmem.length,
@@ -124,6 +143,9 @@ const Create = ({ route }) => {
 
   return (
     <ScrollView style={styles.whiteBackground}>
+      <View style = {{marginTop:20,marginBottom:10,alignItems:'center'}}>
+      <Text style = {styles.headingText}>Create your group!</Text>
+      </View>
       <View style={styles.containerBox}>
         <Text> Group Name:</Text>
         <TextInput
