@@ -1,9 +1,9 @@
-import React from 'react'
-import { useState, useEffect } from 'react';
-import styles from '../styles/styles';
-import {useLocalSearchParams} from 'expo-router';
-import {View, Text, TextInput, TouchableOpacity, Modal, Link} from 'react-native';
-const JoinGroup = () => {
+import React from "react";
+import { useEffect, useState } from "react";
+import { useLocalSearchParams } from "expo-router";
+import styles from "../styles/styles";
+import {View, Text, TextInput, TouchableOpacity, Modal, Link} from "react-native";
+const Join = () => {
     const [roomId, setRoomId] = useState("");
     const [output, setOutput] = useState(false);
     const [outputText,setOutputText] = useState("");
@@ -25,7 +25,7 @@ const JoinGroup = () => {
                 "Content-Type": "application/json", // Set the content type to JSON
               },
               body: JSON.stringify({
-                    newuser:username,
+                    newuser:"Pranav",
                     roomId:roomId
               }), // Convert the body to JSON format using JSON.stringify
             });
@@ -44,7 +44,7 @@ const JoinGroup = () => {
             }
           } catch (error) {
             // Handle any errors that occur during the fetch
-            console.error("Error fetching data:", error);
+            console.log("Error");
           }
     }
   return (
@@ -105,4 +105,4 @@ const JoinGroup = () => {
   )
 }
 
-export default JoinGroup
+export default Join;

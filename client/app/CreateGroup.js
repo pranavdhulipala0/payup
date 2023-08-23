@@ -46,7 +46,7 @@ const CreateGroup = ({ img, username }) => {
             <Link
               onPress={()=>{setModalVisible(false)}} 
               href={{
-                pathname: "/JoinGroup",
+                pathname: "/Join",
                 params: { username: username },
               }}
               style = {styles.blueContainerBox}
