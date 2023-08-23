@@ -1,11 +1,51 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from '../styles/styles';
-import {View, Text, TextInput, TouchableOpacity} from 'react-native';
+import {useLocalSearchParams} from 'expo-router';
+import {View, Text, TextInput, TouchableOpacity, Modal, Link} from 'react-native';
 const JoinGroup = () => {
     const [roomId, setRoomId] = useState("");
-    function joinGroupFunction(){
+    const [output, setOutput] = useState(false);
+    const [outputText,setOutputText] = useState("");
+    const [modalVisible,setModalVisible] = useState(false);
+    const [errorMessage,setErrorMessage] = useState(false);
+    const [successMessage,setSuccessMessage] = useState(false);
+    const [username,setUsername] = useState("");
+    const params = useLocalSearchParams();
+    useEffect(() => {
+        const { username } = params;
+        setUsername(username);
+    }, []);
+  
+    async function joinGroupFunction(){
+        try {
+            const response = await fetch("https://payup-043m.onrender.com/addUser", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json", // Set the content type to JSON
+              },
+              body: JSON.stringify({
+                    newuser:username,
+                    roomId:roomId
+              }), // Convert the body to JSON format using JSON.stringify
+            });
 
+            if(response.status==500){
+                setErrorMessage(true);
+                setSuccessMessage(false);
+                setOutput(true);
+                setOutputText("Group does not exist! Enter a valid group ID!!");
+            }
+            else{
+                setErrorMessage(false);
+                setSuccessMessage(true);
+                setOutput(true);
+                setOutputText("You have successfully joined the group!");
+            }
+          } catch (error) {
+            // Handle any errors that occur during the fetch
+            console.error("Error fetching data:", error);
+          }
     }
   return (
     
@@ -28,6 +68,7 @@ const JoinGroup = () => {
       <TouchableOpacity
         style={styles.wideGreenButton}
         onPress={() => {
+            setModalVisible(true);
           joinGroupFunction();
         }}
       >
@@ -37,6 +78,29 @@ const JoinGroup = () => {
           JOIN GROUP
         </Text>
       </TouchableOpacity>
+      <Modal
+        animationType="fade" // You can use 'slide', 'fade', or 'none'
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(false);
+        }}
+      >
+        <View style={styles.modalContainer}>
+            <Text>{outputText}</Text>
+          <View style={styles.modalContent}>
+            <Link
+              onPress={()=>{setModalVisible(false)}}
+              href={{
+                pathname: "/Create",
+                params: { username: username },
+              }}
+              style = {styles.greenContainerBox}
+            ><Text style={{ color: "white", fontWeight: "bold", alignItems: "center" }}>CREATE GROUP</Text></Link>
+              <Text style = {{margin:5}}>(or)</Text>
+          </View>
+        </View>
+      </Modal>
     </View>
   )
 }
