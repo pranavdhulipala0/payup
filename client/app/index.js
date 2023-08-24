@@ -34,9 +34,9 @@ const Index = () => {
     navigation.navigate("Create");
   }
 
-  function handleRefresh(){
+  async function handleRefresh(){
     setRefreshing(true)
-    fetcher("drakeswd");
+    await fetcher("drakeswd");
     // setMyRooms(updatedData);
     setRefreshing(false);
   }

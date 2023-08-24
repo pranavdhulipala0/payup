@@ -1,12 +1,13 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useNavigation } from "expo-router";
 import styles from "../styles/styles";
 import {View, Text, TextInput, TouchableOpacity, Modal, Link} from "react-native";
 const Join = () => {
+    const navigation = useNavigation();
     const [roomId, setRoomId] = useState("");
-    const [output, setOutput] = useState(false);
-    const [outputText,setOutputText] = useState("");
+    const [output, setOutput] = useState(true);
+    const [outputText,setOutputText] = useState("Please wait...");
     const [modalVisible,setModalVisible] = useState(false);
     const [errorMessage,setErrorMessage] = useState(false);
     const [successMessage,setSuccessMessage] = useState(false);
@@ -14,6 +15,7 @@ const Join = () => {
     const params = useLocalSearchParams();
     useEffect(() => {
         const { username } = params;
+        console.log(username);
         setUsername(username);
     }, []);
   
@@ -25,7 +27,7 @@ const Join = () => {
                 "Content-Type": "application/json", // Set the content type to JSON
               },
               body: JSON.stringify({
-                    newuser:"Pranav",
+                    newuser:username,
                     roomId:roomId
               }), // Convert the body to JSON format using JSON.stringify
             });
@@ -34,7 +36,7 @@ const Join = () => {
                 setErrorMessage(true);
                 setSuccessMessage(false);
                 setOutput(true);
-                setOutputText("Group does not exist! Enter a valid group ID!!");
+                setOutputText("The group does not exist! Enter a valid ID!");
             }
             else{
                 setErrorMessage(false);
@@ -48,7 +50,6 @@ const Join = () => {
           }
     }
   return (
-    
     <View style = {{alignItems:'center', paddingTop: 20}}>
         <Text style = {styles.headingText}>Looking to join a group?</Text>
         <Text>Enter the 10 digit code provided by your friend!</Text>
@@ -84,20 +85,20 @@ const Join = () => {
         visible={modalVisible}
         onRequestClose={() => {
           setModalVisible(false);
+          setOutputText("Please wait...");
         }}
       >
         <View style={styles.modalContainer}>
-            <Text>{outputText}</Text>
           <View style={styles.modalContent}>
-            <Link
-              onPress={()=>{setModalVisible(false)}}
-              href={{
-                pathname: "/Create",
-                params: { username: username },
-              }}
-              style = {styles.greenContainerBox}
-            ><Text style={{ color: "white", fontWeight: "bold", alignItems: "center" }}>CREATE GROUP</Text></Link>
-              <Text style = {{margin:5}}>(or)</Text>
+            <Text>{outputText}</Text>
+            {successMessage?(
+                <View style={{flexDirection:'row'}}>
+                {/* <TouchableOpacity style = {styles.smallButtons}><Text style = {{ color: "white", fontWeight: "bold", alignItems: "center" }}>Copy ID</Text></TouchableOpacity> */}
+                <TouchableOpacity style= {styles.smallButtons} onPress={()=>{navigation.navigate("index")}}><Text style = {{ color: "white", fontWeight: "bold", alignItems: "center" }}>Done!</Text></TouchableOpacity>
+                </View>
+            ):(
+                <View></View>
+            )}
           </View>
         </View>
       </Modal>
